@@ -11,7 +11,12 @@ public class ViveController : MonoBehaviour
     public SteamVR_Input_Sources any = SteamVR_Input_Sources.Any;   
 
     //Trigger Button
-    public SteamVR_Action_Boolean trigger = SteamVR_Actions.default_InteractUI; 
+    public SteamVR_Action_Boolean trigger = SteamVR_Actions.default_InteractUI;
+    //TrackPad Touch True/False
+    private SteamVR_Action_Boolean trackPadTouch;
+    //TrackPad Position (x,y) Vector2
+    private SteamVR_Action_Vector2 trackPadPosition;
+
 
     void Start()
     {
@@ -20,6 +25,8 @@ public class ViveController : MonoBehaviour
         any = SteamVR_Input_Sources.Any;   
 
         trigger = SteamVR_Actions.default_InteractUI;
+        trackPadTouch = SteamVR_Actions.default_TrackPadTouch;
+        trackPadPosition = SteamVR_Actions.default_TrackPadPosition;
     }
 
     // Update is called once per frame
@@ -29,10 +36,18 @@ public class ViveController : MonoBehaviour
         {
             Debug.Log("Left hand trigger down");
         }
+        
         if (trigger.GetState(rightHand))
         {
             Debug.Log($"Right Hand trigger click = {Time.time}");
         }
+
+        if (trackPadTouch.GetState(rightHand))
+        {
+            Vector2 pos = trackPadPosition.GetAxis(rightHand);
+            Debug.Log($"Touch Pos = {pos.x}/{pos.y}");
+        }
+
         /*
             SteamVR_Actions.{ActionSet}_{BindMapping}.GetStateDown({Controller})
             GetStateDown()
