@@ -16,6 +16,8 @@ public class ViveController : MonoBehaviour
     private SteamVR_Action_Boolean trackPadTouch;
     //TrackPad Position (x,y) Vector2
     private SteamVR_Action_Vector2 trackPadPosition;
+    //Heptic
+    private SteamVR_Action_Vibration haptic;
 
 
     void Start()
@@ -27,6 +29,7 @@ public class ViveController : MonoBehaviour
         trigger = SteamVR_Actions.default_InteractUI;
         trackPadTouch = SteamVR_Actions.default_TrackPadTouch;
         trackPadPosition = SteamVR_Actions.default_TrackPadPosition;
+        haptic = SteamVR_Actions.default_Haptic;
     }
 
     // Update is called once per frame
@@ -35,6 +38,7 @@ public class ViveController : MonoBehaviour
         if (trigger.GetStateDown(leftHand))
         {
             Debug.Log("Left hand trigger down");
+            haptic.Execute(0.2f, 0.3f, 50.0f, 0.5f, leftHand);
         }
         
         if (trigger.GetState(rightHand))
