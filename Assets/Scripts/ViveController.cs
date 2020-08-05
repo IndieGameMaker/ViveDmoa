@@ -16,7 +16,11 @@ public class ViveController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        leftHand = SteamVR_Input_Sources.LeftHand;
+        rightHand = SteamVR_Input_Sources.RightHand;
+        any = SteamVR_Input_Sources.Any;   
+
+        trigger = SteamVR_Actions.default_InteractUI;
     }
 
     // Update is called once per frame
