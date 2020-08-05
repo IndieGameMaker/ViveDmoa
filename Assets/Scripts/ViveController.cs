@@ -7,7 +7,7 @@ public class ViveController : MonoBehaviour
 {
     //Hand Controller
     public SteamVR_Input_Sources leftHand;
-    public SteamVR_Input_Sources rightHand = SteamVR_Input_Sources.RightHand;
+    public SteamVR_Input_Sources rightHand;
     public SteamVR_Input_Sources any = SteamVR_Input_Sources.Any;   
 
     //Trigger Button
