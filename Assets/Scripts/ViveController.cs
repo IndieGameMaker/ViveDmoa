@@ -22,15 +22,23 @@ public class ViveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (trigger.GetStateDown(leftHand))
+        {
+            Debug.Log("Left hand trigger down");
+        }
+        if (trigger.GetState(rightHand))
+        {
+            Debug.Log($"Right Hand trigger click = {Time.time}");
+        }
         /*
             SteamVR_Actions.{ActionSet}_{BindMapping}.GetStateDown({Controller})
             GetStateDown()
             GetState()
             GetStateUp();
         */
-        if (SteamVR_Actions.default_InteractUI.GetStateDown(SteamVR_Input_Sources.LeftHand))
-        {
-            Debug.Log("Trigger Left Hand");
-        }
+        // if (SteamVR_Actions.default_InteractUI.GetStateDown(SteamVR_Input_Sources.LeftHand))
+        // {
+        //     Debug.Log("Trigger Left Hand");
+        // }
     }
 }
