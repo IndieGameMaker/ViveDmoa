@@ -5,6 +5,14 @@ using Valve.VR;
 
 public class ViveController : MonoBehaviour
 {
+    //Hand Controller
+    public SteamVR_Input_Sources leftHand = SteamVR_Input_Sources.LeftHand;
+    public SteamVR_Input_Sources rightHand = SteamVR_Input_Sources.RightHand;
+    public SteamVR_Input_Sources any = SteamVR_Input_Sources.Any;   
+
+    //Trigger Button
+    public SteamVR_Action_Boolean trigger = SteamVR_Actions.default_InteractUI; 
+
     // Start is called before the first frame update
     void Start()
     {
