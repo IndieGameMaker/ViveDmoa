@@ -100,6 +100,7 @@ public class LaserPointer : MonoBehaviour
             if (teleport.GetStateDown(hand))
             {
                 SteamVR_Fade.Start(Color.black, 0.0f);
+                StartCoroutine(this.Teleport(hit.point));
             }
         }
         else
