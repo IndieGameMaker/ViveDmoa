@@ -35,6 +35,7 @@ public class LaserPointer : MonoBehaviour
         line.endWidth   = 0.005f;
 
         line.numCornerVertices = 20;
-        
+        line.material = new Material(Shader.Find("Unlit/Color"));
+        line.material.color = defaultColor;
     }
 }
