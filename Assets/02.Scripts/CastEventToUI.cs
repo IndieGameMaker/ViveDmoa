@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems; //<==
 using Valve.VR;
 using Valve.VR.Extras;
 
@@ -31,7 +32,10 @@ public class CastEventToUI : MonoBehaviour
     //Laser Pointer Hover
     void OnPointerEnter(object sender, PointerEventArgs e)
     {
+        IPointerEnterHandler handler = e.target.GetComponent<IPointerEnterHandler>();
+        if (handler == null) return;
 
+        handler.OnPointerEnter(new PointerEventData(EventSystem.current));
     }
 
     //Laser Pointer Exit
