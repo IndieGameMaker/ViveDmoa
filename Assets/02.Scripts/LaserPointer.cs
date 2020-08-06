@@ -24,5 +24,14 @@ public class LaserPointer : MonoBehaviour
     void CreateLine()
     {
         line = this.gameObject.AddComponent<LineRenderer>();
+        line.useWorldSpace = false;
+        line.receiveShadows = false;
+
+        //Start Point, End Point
+        line.positionCount = 2;
+        line.SetPosition(1, new Vector3(0, 0, maxDistance));
+
+        line.startWidth = 0.05f;
+        line.endWidth   = 0.005f;
     }
 }
