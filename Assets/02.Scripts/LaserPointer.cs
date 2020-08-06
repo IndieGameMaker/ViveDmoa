@@ -62,12 +62,22 @@ public class LaserPointer : MonoBehaviour
                                      , ExecuteEvents.pointerEnterHandler);
 
                 //Previous Button Send Event
-                 ExecuteEvents.Execute( prevButton
+                ExecuteEvents.Execute( prevButton
                                      , new PointerEventData(EventSystem.current)
                                      , ExecuteEvents.pointerExitHandler); 
                 prevButton = currButton;              
             }
-
+        }
+        else
+        {
+            if (prevButton != null)
+            {
+                //Previous Button Send Event
+                ExecuteEvents.Execute( prevButton
+                                     , new PointerEventData(EventSystem.current)
+                                     , ExecuteEvents.pointerExitHandler); 
+                prevButton = null;
+            }
         }
     }
 }
