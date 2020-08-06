@@ -8,6 +8,8 @@ public class LaserPointer : MonoBehaviour
     private SteamVR_Behaviour_Pose pose;
     private SteamVR_Input_Sources hand;
     private SteamVR_Action_Boolean trigger;
+    private Transform tr;
+    private RaycastHit hit;
 
     private LineRenderer line;
     public float maxDistance = 10.0f;
@@ -16,6 +18,7 @@ public class LaserPointer : MonoBehaviour
 
     void Start()
     {
+        tr = GetComponent<Transform>();
         pose = GetComponent<SteamVR_Behaviour_Pose>();    
         hand = pose.inputSource;
         CreateLine();  
