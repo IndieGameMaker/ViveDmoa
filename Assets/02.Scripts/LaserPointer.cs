@@ -42,4 +42,12 @@ public class LaserPointer : MonoBehaviour
         line.material = new Material(Shader.Find("Unlit/Color"));
         line.material.color = defaultColor;
     }
+
+    void Update()
+    {
+        if (Physics.Raycast(tr.position, tr.forward, out hit, maxDistance))
+        {
+            line.SetPosition(1, new Vector3(0.0f, 0.0f, hit.distance));
+        }
+    }
 }
