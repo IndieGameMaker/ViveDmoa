@@ -13,6 +13,20 @@ public class CastEventToUI : MonoBehaviour
         laserPointer = GetComponent<SteamVR_LaserPointer>();        
     }
 
+    void OnEnable()
+    {
+        laserPointer.PointerIn    += OnPointerEnter;
+        laserPointer.PointerOut   += OnPointerExit;
+        laserPointer.PointerClick += OnPointerClick;
+    }
+
+    void OnDisable()
+    {
+        laserPointer.PointerIn    -= OnPointerEnter;
+        laserPointer.PointerOut   -= OnPointerExit;
+        laserPointer.PointerClick -= OnPointerClick;        
+    }
+
     
     //Laser Pointer Hover
     void OnPointerEnter(object sender, PointerEventArgs e)
