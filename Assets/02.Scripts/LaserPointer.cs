@@ -9,6 +9,8 @@ public class LaserPointer : MonoBehaviour
     private SteamVR_Behaviour_Pose pose;
     private SteamVR_Input_Sources hand;
     private SteamVR_Action_Boolean trigger;
+    private SteamVR_Action_Boolean teleport;
+
     private Transform tr;
     private RaycastHit hit;
 
@@ -23,6 +25,8 @@ public class LaserPointer : MonoBehaviour
     public GameObject pointerPrefab;
     private GameObject pointer;
 
+    public float fadeDuration = 0.2f;
+
     void Start()
     {
         tr = GetComponent<Transform>();
@@ -30,6 +34,7 @@ public class LaserPointer : MonoBehaviour
         hand = pose.inputSource;
 
         trigger = SteamVR_Actions.default_InteractUI;
+        teleport = SteamVR_Actions.default_Teleport;
 
         pointer = Instantiate(pointerPrefab);
 
@@ -91,6 +96,11 @@ public class LaserPointer : MonoBehaviour
             {
                 line.material.color = defaultColor;
             }
+
+            if (teleport.GetStateDown(hand))
+            {
+                SteamVR_Fade.Start(Color.black, 0.0f);
+            }
         }
         else
         {
@@ -107,5 +117,13 @@ public class LaserPointer : MonoBehaviour
                 prevButton = null;
             }
         }
+    }//Update
+
+    IEnumerator Teleport(Vector3 pos)
+    {
+        tr.parent.transform.position = pos;
+        yield return new WaitForSeconds(fadeDuration);
+        SteamVR_Fade.Start(Color.clear, 0.2f);
     }
+
 }
