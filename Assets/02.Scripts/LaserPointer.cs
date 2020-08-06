@@ -25,6 +25,8 @@ public class LaserPointer : MonoBehaviour
         tr = GetComponent<Transform>();
         pose = GetComponent<SteamVR_Behaviour_Pose>();    
         hand = pose.inputSource;
+
+        trigger = SteamVR_Actions.default_InteractUI;
         CreateLine();  
     }
 
@@ -66,6 +68,12 @@ public class LaserPointer : MonoBehaviour
                                      , new PointerEventData(EventSystem.current)
                                      , ExecuteEvents.pointerExitHandler); 
                 prevButton = currButton;              
+            }
+            if (trigger.GetStateDown(hand))
+            {
+                ExecuteEvents.Execute( currButton
+                                     , new PointerEventData(EventSystem.current)
+                                     , ExecuteEvents.pointerClickHandler);
             }
         }
         else
