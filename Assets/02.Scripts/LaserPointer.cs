@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Valve.VR;
 
 public class LaserPointer : MonoBehaviour
@@ -15,6 +16,9 @@ public class LaserPointer : MonoBehaviour
     public float maxDistance = 10.0f;
     public Color defaultColor = Color.green; //new Color(0.0f, 1.0f, 0.0f, 0.0f);
     public Color clickedColor = Color.red;
+
+    private GameObject currButton = null;
+    private GameObject prevButton = null;
 
     void Start()
     {
@@ -48,6 +52,22 @@ public class LaserPointer : MonoBehaviour
         if (Physics.Raycast(tr.position, tr.forward, out hit, maxDistance))
         {
             line.SetPosition(1, new Vector3(0.0f, 0.0f, hit.distance));
+
+            currButton = hit.collider.gameObject;
+            if (currButton != prevButton)
+            {
+                //Current Button Send Event
+                ExecuteEvents.Execute( currButton
+                                     , new PointerEventData(EventSystem.current)
+                                     , ExecuteEvents.pointerEnterHandler);
+
+                //Previous Button Send Event
+                 ExecuteEvents.Execute( prevButton
+                                     , new PointerEventData(EventSystem.current)
+                                     , ExecuteEvents.pointerExitHandler); 
+                prevButton = currButton;              
+            }
+
         }
     }
 }
