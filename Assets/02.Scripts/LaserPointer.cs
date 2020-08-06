@@ -33,5 +33,8 @@ public class LaserPointer : MonoBehaviour
 
         line.startWidth = 0.05f;
         line.endWidth   = 0.005f;
+
+        line.numCornerVertices = 20;
+        
     }
 }
