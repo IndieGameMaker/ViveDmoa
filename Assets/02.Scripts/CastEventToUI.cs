@@ -41,7 +41,10 @@ public class CastEventToUI : MonoBehaviour
     //Laser Pointer Exit
     void OnPointerExit(object sender, PointerEventArgs e)
     {
+        IPointerExitHandler handler = e.target.GetComponent<IPointerExitHandler>();
+        if (handler == null) return;
 
+        handler.OnPointerExit(new PointerEventData(EventSystem.current));
     }
 
     //Laser Pointer Click
