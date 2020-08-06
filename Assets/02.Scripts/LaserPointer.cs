@@ -69,11 +69,17 @@ public class LaserPointer : MonoBehaviour
                                      , ExecuteEvents.pointerExitHandler); 
                 prevButton = currButton;              
             }
+
             if (trigger.GetStateDown(hand))
             {
                 ExecuteEvents.Execute( currButton
                                      , new PointerEventData(EventSystem.current)
                                      , ExecuteEvents.pointerClickHandler);
+                line.material.color = clickedColor;
+            }
+            else
+            {
+                line.material.color = defaultColor;
             }
         }
         else
