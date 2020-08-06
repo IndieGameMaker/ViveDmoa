@@ -77,13 +77,15 @@ public class LaserPointer : MonoBehaviour
                                      , ExecuteEvents.pointerClickHandler);
                 line.material.color = clickedColor;
             }
-            else
+            
+            if (trigger.GetStateUp(hand))
             {
                 line.material.color = defaultColor;
             }
         }
         else
         {
+            line.SetPosition(1, new Vector3(0.0f, 0.0f, maxDistance));
             if (prevButton != null)
             {
                 //Previous Button Send Event
