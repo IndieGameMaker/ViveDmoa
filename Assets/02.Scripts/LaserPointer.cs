@@ -20,6 +20,9 @@ public class LaserPointer : MonoBehaviour
     private GameObject currButton = null;
     private GameObject prevButton = null;
 
+    public GameObject pointerPrefab;
+    private GameObject pointer;
+
     void Start()
     {
         tr = GetComponent<Transform>();
@@ -27,6 +30,9 @@ public class LaserPointer : MonoBehaviour
         hand = pose.inputSource;
 
         trigger = SteamVR_Actions.default_InteractUI;
+
+        pointer = Instantiate(pointerPrefab);
+
         CreateLine();  
     }
 
@@ -54,6 +60,9 @@ public class LaserPointer : MonoBehaviour
         if (Physics.Raycast(tr.position, tr.forward, out hit, maxDistance))
         {
             line.SetPosition(1, new Vector3(0.0f, 0.0f, hit.distance));
+
+            pointer.transform.position = hit.point;
+            pointer.transform.rotation = Quaternion.LookRotation(hit.normal);
 
             currButton = hit.collider.gameObject;
             if (currButton != prevButton)
@@ -86,6 +95,9 @@ public class LaserPointer : MonoBehaviour
         else
         {
             line.SetPosition(1, new Vector3(0.0f, 0.0f, maxDistance));
+            pointer.transform.position = tr.position + (tr.forward * maxDistance);
+            pointer.transform.rotation = Quaternion.LookRotation(tr.forward);
+
             if (prevButton != null)
             {
                 //Previous Button Send Event
