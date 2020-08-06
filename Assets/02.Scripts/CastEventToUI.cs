@@ -50,7 +50,10 @@ public class CastEventToUI : MonoBehaviour
     //Laser Pointer Click
     void OnPointerClick(object sender, PointerEventArgs e)
     {
+        IPointerClickHandler handler = e.target.GetComponent<IPointerClickHandler>();
+        if (handler == null) return;
 
+        handler.OnPointerClick(new PointerEventData(EventSystem.current));
     }
 
 }
